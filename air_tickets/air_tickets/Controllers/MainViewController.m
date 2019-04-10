@@ -66,6 +66,7 @@
 - (void)searchButtonTap {
     [[APIManager sharedInstance] ticketsWithRequest:_searchRequest witnCompletion:^(NSArray *tickets) {
         TicketsViewController *vc = [[TicketsViewController alloc] initWithTickets:tickets];
+        [UIView transitionFromView:self.view toView:vc.view duration:0.6 options:UIViewAnimationOptionTransitionCrossDissolve completion:nil];
         [self.navigationController pushViewController:vc animated:true];
         
     }];
@@ -74,12 +75,15 @@
 - (void)departureButtonTap {
     PlaceViewController *vc = [[PlaceViewController alloc] initWithType:PlaceTypeDeparture];
     [vc setDelegate:self];
+    [UIView transitionFromView:self.view toView:vc.view duration:0.6 options:UIViewAnimationOptionTransitionCurlUp completion:nil];
     [self.navigationController pushViewController:vc animated:true];
 }
 
 - (void)arrivalButtonTap {
     PlaceViewController *vc = [[PlaceViewController alloc] initWithType:PlaceTypeArrival];
     [vc setDelegate:self];
+    
+    [UIView transitionFromView:self.view toView:vc.view duration:0.9 options:UIViewAnimationOptionTransitionCurlUp completion:nil];
     [self.navigationController pushViewController:vc animated:true];
 }
 

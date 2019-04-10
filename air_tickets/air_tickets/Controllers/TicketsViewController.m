@@ -183,7 +183,7 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     cell.layer.transform = CATransform3DMakeRotation((90*3.14/180), 0, 1, 0);
-    [UIView animateWithDuration:0.6 delay:0.4 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:0.6 delay:0.1 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         cell.layer.transform = CATransform3DIdentity;
     } completion:nil];
 }
