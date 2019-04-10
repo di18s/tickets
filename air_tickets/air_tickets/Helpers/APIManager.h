@@ -7,11 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-
-NS_ASSUME_NONNULL_BEGIN
+#import "City.h"
+#import "PlaceViewController.h"
 
 @interface APIManager : NSObject
 
-@end
+- (void)cityForCurrentIP:(void (^)(City *city))completion;
++ (instancetype)sharedInstance;
+- (void)ticketsWithRequest:(SearchRequest)request witnCompletion:(void (^)(NSArray *tickets))completion;
+- (void)mapPricesFor:(City*)origin withCompletion:(void (^)(NSArray *prices))completion;
 
-NS_ASSUME_NONNULL_END
+@end

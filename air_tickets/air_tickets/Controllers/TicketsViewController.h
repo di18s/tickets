@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-NS_ASSUME_NONNULL_BEGIN
 
-@interface TicketsViewController : UIViewController
+@interface TicketsViewController : UITableViewController
+@property (nonatomic, strong) NSString *code;
+@property (nonatomic, strong) NSString *price;
+@property (nonatomic, strong) NSMutableArray *ticketsFromMap;
 
+
+- (instancetype)initWithTickets:(NSArray *)tickets;
+- (instancetype)initFavoriteTicketsController;
+- (instancetype)initFavoriteTicketsFromMapController;
 @end
-
-NS_ASSUME_NONNULL_END

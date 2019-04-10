@@ -7,11 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
-
-NS_ASSUME_NONNULL_BEGIN
+#import <YYWebImage/YYWebImage.h>
+#import "Ticket.h"
+#import "FavoriteTicket+CoreDataClass.h"
 
 @interface TicketTableViewCell : UITableViewCell
 
-@end
+@property (nonatomic, strong) UIImageView *airlineLogoView;
+@property (nonatomic, strong) UILabel *priceLabel;
+@property (nonatomic, strong) UILabel *placesLabel;
+@property (nonatomic, strong) UILabel *dateLabel;
 
-NS_ASSUME_NONNULL_END
+@property (nonatomic, strong) Ticket *ticket;
+@property (nonatomic, strong) FavoriteTicket *favoriteTicket;
+
+
+
+@end

@@ -8,10 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
+#define kLocationServiceDidUpdateCurrentLocation @"kLocationServiceDidUpdateCurrentLocation"
 
 @interface LocationService : NSObject
 
 @end
-
-NS_ASSUME_NONNULL_END

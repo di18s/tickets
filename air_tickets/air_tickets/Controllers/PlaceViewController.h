@@ -7,11 +7,31 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DataManager.h"
 
-NS_ASSUME_NONNULL_BEGIN
+typedef enum PlaceType {
+    PlaceTypeArrival,
+    PlaceTypeDeparture
+} PlaceType;
 
-@interface PlaceViewController : UIViewController
+typedef struct SearchRequest {
+    __unsafe_unretained NSString *origin;
+    __unsafe_unretained NSString *destination;
+    __unsafe_unretained NSDate *departDate;
+    __unsafe_unretained NSDate *returnDate;
+} SearchRequest;
+
+@protocol PlaceViewControllerDelegate <NSObject>
+
+- (void)selectPlace:(id)place withType:(PlaceType)placeType andDataType:(DataSourceType)dataType;
 
 @end
 
-NS_ASSUME_NONNULL_END
+@interface PlaceViewController : UIViewController
+
+@property (nonatomic, strong)id<PlaceViewControllerDelegate>delegate;
+- (instancetype)initWithType:(PlaceType)type;
+
+@end
+
+

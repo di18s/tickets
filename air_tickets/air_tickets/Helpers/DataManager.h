@@ -7,11 +7,28 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Country.h"
+#import "City.h"
+#import "Airport.h"
 
-NS_ASSUME_NONNULL_BEGIN
+#define kDataManagerLoadDataDidComplete @"kDataManagerLoadDataDidComplete"
+
+typedef enum DataSourceType {
+    DataSourceTypeCountry,
+    DataSourceTypeCity,
+    DataSourceTypeAirport
+} DataSourceType;
 
 @interface DataManager : NSObject
 
+@property (nonatomic, strong, readonly) NSArray *countries;
+@property (nonatomic, strong, readonly) NSArray *cities;
+@property (nonatomic, strong, readonly) NSArray *airports;
+
++ (instancetype)sharedInstance;
+- (void)loadData;
+- (City*)cityForIATA:(NSString*)iata;
+- (City*)cityForLocation:(CLLocation*)location;
+
 @end
 
-NS_ASSUME_NONNULL_END
