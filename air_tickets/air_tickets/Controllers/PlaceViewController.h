@@ -29,7 +29,7 @@ typedef struct SearchRequest {
 
 @interface PlaceViewController : UIViewController
 
-@property (nonatomic, strong)id<PlaceViewControllerDelegate>delegate;
+@property (nonatomic, weak)id<PlaceViewControllerDelegate>delegate;
 - (instancetype)initWithType:(PlaceType)type;
 
 @end

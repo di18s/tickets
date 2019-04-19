@@ -19,7 +19,7 @@
         _returnDate = dateWithString([dictionary valueForKey:@"return_at"]);
         _flightNumber = [dictionary valueForKey:@"flight_number"];
         _price = [dictionary valueForKey:@"price"];
-        //_filterNum = 1;
+        
     }
     return self;
 }
@@ -27,7 +27,7 @@
 NSDate *dateWithString(NSString *dateString) {
     if (!dateString) { return nil; }
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    NSString *correctStringDate = [dateString stringByReplacingOccurrencesOfString:@"T" withString:@""];
+    NSString *correctStringDate = [dateString stringByReplacingOccurrencesOfString:@"T" withString:@" "];
     correctStringDate = [correctStringDate stringByReplacingOccurrencesOfString:@"Z" withString:@""];
     dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
     return [dateFormatter dateFromString:correctStringDate];

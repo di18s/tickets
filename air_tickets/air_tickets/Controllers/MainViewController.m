@@ -11,6 +11,7 @@
 #import "PlaceViewController.h"
 #import "APIManager.h"
 #import "TicketsViewController.h"
+#import "ProgressView.h"
 
 @interface MainViewController () <PlaceViewControllerDelegate>
 
@@ -27,7 +28,7 @@
     
     [self.view setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
     
-    [self setTitle:@"Поиск"];
+    [self setTitle: NSLocalizedString(@"Search", @"")];
     
     UIView *container = [[UIView alloc] initWithFrame:CGRectMake(50, 200, self.view.bounds.size.width - 100, 150)];
     [container setBackgroundColor:[UIColor whiteColor]];
@@ -35,7 +36,7 @@
     [self.view addSubview:container];
     
     _departureButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, container.bounds.size.width - 20, 50)];
-    [_departureButton setTitle:@"Откуда" forState:UIControlStateNormal];
+    [_departureButton setTitle:NSLocalizedString(@"From", @"") forState:UIControlStateNormal];
     [_departureButton.layer setCornerRadius:4];
     [_departureButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [_departureButton setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
@@ -43,7 +44,7 @@
     [container addSubview:_departureButton];
     
     _arrivalButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 70, container.bounds.size.width - 20, 50)];
-    [_arrivalButton setTitle:@"Куда" forState:UIControlStateNormal];
+    [_arrivalButton setTitle:NSLocalizedString(@"To", @"") forState:UIControlStateNormal];
     [_arrivalButton.layer setCornerRadius:4];
     [_arrivalButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [_arrivalButton setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
@@ -52,7 +53,7 @@
     
     UIButton *searchButton = [[UIButton alloc] initWithFrame:CGRectMake(50, 400, self.view.bounds.size.width - 100, 50)];
     [searchButton setBackgroundColor:[UIColor blackColor]];
-    [searchButton setTitle:@"Найти" forState:UIControlStateNormal];
+    [searchButton setTitle:NSLocalizedString(@"Find", @"") forState:UIControlStateNormal];
     [searchButton.layer setCornerRadius:4];
     [searchButton addTarget:self action:@selector(searchButtonTap) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:searchButton];
@@ -64,11 +65,14 @@
 }
 
 - (void)searchButtonTap {
-    [[APIManager sharedInstance] ticketsWithRequest:_searchRequest witnCompletion:^(NSArray *tickets) {
-        TicketsViewController *vc = [[TicketsViewController alloc] initWithTickets:tickets];
-        [UIView transitionFromView:self.view toView:vc.view duration:0.6 options:UIViewAnimationOptionTransitionCrossDissolve completion:nil];
-        [self.navigationController pushViewController:vc animated:true];
-        
+    [[ProgressView sharedInstance] show:^{
+        [[APIManager sharedInstance] ticketsWithRequest:self.searchRequest witnCompletion:^(NSArray *tickets) {
+            [[ProgressView sharedInstance] dismiss:^{
+                TicketsViewController *vc = [[TicketsViewController alloc] initWithTickets:tickets];
+                [UIView transitionFromView:self.view toView:vc.view duration:0.6 options:UIViewAnimationOptionTransitionCurlUp completion:nil];
+                [self.navigationController pushViewController:vc animated:true];
+            }];
+        }];
     }];
 }
 
@@ -113,7 +117,7 @@
 }
 
 - (void)selectPlace:(id)place withType:(PlaceType)placeType andDataType:(DataSourceType)dataType {
-    [self setPlace:place withType:place andDataType:dataType forButton:(placeType == PlaceTypeDeparture) ? _departureButton : _arrivalButton];
+    [self setPlace:place withType:placeType andDataType:dataType forButton:(placeType == PlaceTypeDeparture) ? _departureButton : _arrivalButton];
 }
 
 @end

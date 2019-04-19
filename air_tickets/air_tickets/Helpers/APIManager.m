@@ -105,16 +105,24 @@ NSString *SeacrchRequestQuery(SearchRequest request) {
     if (request.departDate && request.returnDate) {
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         dateFormatter.dateFormat = @"yyyy-MM";
-        result = [NSString stringWithFormat:@"%@&depart_date=%@&return_date=%@", result, [dateFormatter stringFromDate:[NSDate new]], [dateFormatter stringFromDate:[NSDate new]]];
+//        result = [NSString stringWithFormat:@"%@&depart_date=%@&return_date=%@", result, [dateFormatter stringFromDate:[NSDate new]], [dateFormatter stringFromDate:[NSDate new]]];
+        
+        result = [NSString stringWithFormat:@"%@&depart_date=%@&return_date=%@", result, [dateFormatter stringFromDate:request.departDate], [dateFormatter stringFromDate:request.returnDate]];
+
+        
     }
     return result;
 }
 
 - (void)load:(NSString*)urlString withCompletion:(void (^)(id _Nullable result))completion {
+    //создаем сессию
     NSURLSession *session = [NSURLSession sharedSession];
+    //создаем задачу для сессии
     NSURLSessionTask *task = [session dataTaskWithURL:[NSURL URLWithString:urlString]
                                     completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                                        //преобразуем данные полученные с сервера в джейсон
                                         id serializtion = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+                                        //и потом будем работать с этими данными из комплишена
                                         completion(serializtion);
                                     }];
     [task resume];

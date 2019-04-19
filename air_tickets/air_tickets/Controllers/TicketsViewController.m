@@ -48,12 +48,12 @@
     if (self) {
         isFavorites = YES;
         self.tickets = [NSMutableArray new];
-        self.title = @"Избранное";
+        self.title = NSLocalizedString(@"Favorite", @"");
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [self.navigationItem setTitleView:_segmentedControl];
         [self.tableView registerClass:[TicketTableViewCell class] forCellReuseIdentifier:TicketCellReuseIdentifier];
         UIBarButtonItem *item=[[UIBarButtonItem alloc]
-                               initWithTitle:@"Очистить"   style:UIBarButtonItemStylePlain
+                               initWithTitle:NSLocalizedString(@"Clear", @"")   style:UIBarButtonItemStylePlain
                                target:self  action:@selector(removeAllFavorites)];
         self.navigationItem.rightBarButtonItem = item;
     }

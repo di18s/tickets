@@ -1,0 +1,16 @@
+/* 
+  Localizable.strings
+  air_tickets
+
+  Created by Дмитрий on 16/04/2019.
+  Copyright © 2019 Dmitry. All rights reserved.
+*/
+"Search" = "Поиск";
+"Map price" = "Карта цен";
+"Favorite" = "Избранное";
+"Find" = "Найти";
+"From" = "Откуда";
+"To" = "Куда";
+"City" = "Города";
+"Airports" = "Аэропорты";
+"Clear" = "Очистить";

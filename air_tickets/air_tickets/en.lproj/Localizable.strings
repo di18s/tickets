@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  air_tickets
+
+  Created by Дмитрий on 16/04/2019.
+  Copyright © 2019 Dmitry. All rights reserved.
+*/
+"Search" = "Search";
+"Map price" = "Map price";
+"Favorite" = "Favorite";
+"Find" = "Find";
+"From" = "From";
+"To" = "To";

@@ -38,7 +38,7 @@
     
     self.navigationItem.hidesSearchBarWhenScrolling = false;
     
-    self.title = @"Поиск";
+    self.title = NSLocalizedString(@"Search", @"");
     
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
@@ -54,7 +54,7 @@
     [_tableView setDelegate:self];
     [self.view addSubview:_tableView];
     
-    _segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"Города", @"Аэропорты"]];
+    _segmentedControl = [[UISegmentedControl alloc] initWithItems:@[NSLocalizedString(@"City", @""), NSLocalizedString(@"Airports", @"")]];
     [_segmentedControl setTintColor:[UIColor blackColor]];
     [_segmentedControl addTarget:self action:@selector(changeSource) forControlEvents:UIControlEventValueChanged];
     [_segmentedControl setSelectedSegmentIndex:0];
@@ -118,7 +118,10 @@
         Airport *airport = (_searchVC.isActive && [_serachItems count] > 0) ? [_serachItems objectAtIndex:indexPath.row] : [_items objectAtIndex:indexPath.row];
         [self.delegate selectPlace:airport withType:_placeType andDataType:DataSourceTypeAirport];
     }
-    [self.navigationController popViewControllerAnimated:true];
+//    UIViewController* mvc = self.navigationController.viewControllers.firstObject;
+//    [UIView transitionFromView:self.view toView: mvc.view duration:0.9 options:UIViewAnimationOptionTransitionCurlDown completion:^(BOOL finished) {
+        [self.navigationController popViewControllerAnimated:true];
+    //}];
 }
 
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
